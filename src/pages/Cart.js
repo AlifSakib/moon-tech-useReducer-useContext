@@ -7,8 +7,6 @@ const Cart = () => {
     state: { cart, loading, error },
   } = useProducts();
 
-  console.log(cart);
-
   let content;
   if (loading) {
     content = <p>Loading</p>;
@@ -22,6 +20,11 @@ const Cart = () => {
     content = <p>Nothing to show, List is empty</p>;
   }
 
+  if (!loading && !error && cart.length) {
+    content = cart.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ));
+  }
   if (!loading && !error && cart.length) {
     content = cart.map((product) => (
       <ProductCard key={product._id} product={product} />

@@ -5,6 +5,7 @@ export const initialState = {
   products: [],
   error: false,
   cart: [],
+  removedProduct: [],
 };
 
 export const productReducer = (state, action) => {
@@ -33,6 +34,12 @@ export const productReducer = (state, action) => {
       return {
         ...state,
         cart: [...state.cart, action.payload],
+      };
+
+    case actionTypes.REMOVE_FROM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((product) => product._id !== action.payload),
       };
 
     default:
